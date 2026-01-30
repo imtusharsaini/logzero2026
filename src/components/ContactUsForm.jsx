@@ -60,7 +60,7 @@ export default function ContactSection({
     phone: "",
     detail: "",
   });
-  const [formSuccess, setFormSucess] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [recaptchaToken, setRecaptchaToken] = useState(null);
 
@@ -73,14 +73,6 @@ export default function ContactSection({
 
     const submissionMeta = buildFormLogMeta(formData);
     logger.debug({ submissionMeta }, "Submitting contact form");
-
-    // The reCAPTCHA widget inserts a hidden input field named 'g-recaptcha-response'
-    const recaptchaTokenField = document.querySelector(
-      '[name="g-recaptcha-response"]',
-    );
-    const recaptchaToken = recaptchaTokenField
-      ? recaptchaTokenField.value
-      : null;
 
     if (!recaptchaToken) {
       logger.warn(
@@ -144,7 +136,7 @@ export default function ContactSection({
         );
 
         // console.log(responseData);
-        setFormSucess(true);
+        setFormSuccess(true);
         setFormData({
           name: "",
           email: "",

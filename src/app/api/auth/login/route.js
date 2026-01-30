@@ -24,7 +24,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error during login:", error);
     return Response.json(
-      { success: false, message: error.message },
+      { success: false, message: "Internal Server Error" },
       { status: 500 }
     );
   }

@@ -1,0 +1,46 @@
+
+> lzt-next@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.5.0 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+
+ ✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+ ✓ Ready in 1260ms
+ ⚠ Your project has `@next/font` installed as a dependency, please use the built-in `next/font` instead. The `@next/font` package will be removed in Next.js 14. You can migrate by running `npx @next/codemod@latest built-in-next-font .`. Read more: https://nextjs.org/docs/messages/built-in-next-font
+ ○ Compiling /_not-found/page ...
+(node:4161) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///app/postcss.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ Compiled /_not-found/page in 19.8s
+ GET /contact-us 404 in 21781ms
+ GET /posts?type=case_study 404 in 372ms
+ ○ Compiling /Contact-Us ...
+ ✓ Compiled /Contact-Us in 2.2s
+ GET /Contact-Us 200 in 3853ms
+ ○ Compiling /blog/category/[slug] ...
+ GET /posts?type=case_study 404 in 1171ms
+ ✓ Compiled /blog/category/[slug] in 1717ms
+fetchCategoryRows error: TypeError: Invalid URL
+    at new Promise (<anonymous>)
+    at async fetchCategoryRows (src/app/blog/category/[slug]/page.jsx:61:20)
+    at async CategoryPage (src/app/blog/category/[slug]/page.jsx:79:15)
+  59 | 		const params = { type: "blog_post", blogCategory: slug };
+  60 | 		if (page && page > 1) params.page = page;
+> 61 | 		const { data } = await api.get("/posts", { params });
+     | 		                 ^
+  62 | 		const rows = data?.data?.rows ?? data?.rows ?? [];
+  63 | 		rows.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  64 | 		return rows; {
+  code: 'ERR_INVALID_URL',
+  input: '/posts'
+}
+ GET /blog/category/dev 200 in 3777ms
+ GET /posts?type=case_study 404 in 286ms
