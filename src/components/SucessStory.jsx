@@ -65,6 +65,7 @@ const normalizeCaseStudy = (study = {}, fallbackImage) => {
 };
 
 export default function SuccessStory({
+  caseStudies,
   title,
   subtitle,
   Resultstext,
@@ -73,7 +74,7 @@ export default function SuccessStory({
   portfolioCategorySlug,
   fallbackImage = "/assets/img/health-tracker.png",
 }) {
-  const [fetchedStudies, setFetchedStudies] = useState([]);
+  const [fetchedStudies, setFetchedStudies] = useState(caseStudies || []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -84,6 +85,12 @@ export default function SuccessStory({
   }, [portfolioCategoryId, portfolioCategorySlug]);
 
   useEffect(() => {
+    // If caseStudies are provided via props, use them and skip fetch
+    if (caseStudies && caseStudies.length > 0) {
+      setFetchedStudies(caseStudies);
+      return;
+    }
+
     const controller = new AbortController();
     const fetchCaseStudies = async () => {
       setLoading(true);
@@ -135,7 +142,7 @@ export default function SuccessStory({
     fetchCaseStudies();
 
     return () => controller.abort();
-  }, [resolvedCategoryId, fallbackImage]);
+  }, [resolvedCategoryId, fallbackImage, caseStudies]);
 
   const displayStudies = fetchedStudies;
   const isEmpty = !displayStudies || displayStudies.length === 0;

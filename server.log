@@ -44,3 +44,4 @@ fetchCategoryRows error: TypeError: Invalid URL
 }
  GET /blog/category/dev 200 in 3777ms
  GET /posts?type=case_study 404 in 286ms
+ ✓ Compiled in 7.7s

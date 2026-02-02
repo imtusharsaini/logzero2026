@@ -1,4 +1,4 @@
-
+"use client";
 import CountUp from "react-countup";
 
 function CounterNo({ labelsize, numbersize, gapadd, nostats = [] }) {
@@ -32,18 +32,6 @@ function CounterNo({ labelsize, numbersize, gapadd, nostats = [] }) {
           <p className={`subtext ${labelsize}`}>{item.label}</p>
         </div>
       ))}
-        {/* <div>
-            <span className="text-2xl textblue7 font-bold"><CountUp end={1000} duration={2} />+</span>
-            <p className="subtext textcolor">Projects Completed</p>
-        </div>
-        <div>
-            <span className="text-2xl textblue7 font-bold"><CountUp end={100} duration={2} />+</span>
-            <p className="subtext textcolor">Expert Developer</p>
-        </div>
-        <div>
-            <span className="text-2xl textblue7 font-bold"><CountUp end={10} duration={2} />+</span>
-            <p className="subtext textcolor">Industries Served</p>
-        </div> */}
     </div>
   );
 }
