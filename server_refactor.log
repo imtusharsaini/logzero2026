@@ -1,0 +1,33 @@
+
+> lzt-next@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
+   ▲ Next.js 15.5.0 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.0.2:3001
+
+ ✓ Starting...
+ ✓ Ready in 2.6s
+ ⚠ Your project has `@next/font` installed as a dependency, please use the built-in `next/font` instead. The `@next/font` package will be removed in Next.js 14. You can migrate by running `npx @next/codemod@latest built-in-next-font .`. Read more: https://nextjs.org/docs/messages/built-in-next-font
+ ○ Compiling / ...
+(node:9043) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///app/postcss.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ Compiled / in 19.4s
+Error fetching case studies on server: TypeError: Invalid URL
+    at new Promise (<anonymous>)
+    at async fetchCaseStudies (src/app/page.js:45:31)
+    at async Page (src/app/page.js:92:23)
+  43 |     // api.js uses NEXT_PUBLIC_API_BASE_URL.
+  44 |
+> 45 |     const { data: payload } = await api.get("/posts/case-study?portfolioCategoryIds=2");
+     |                               ^
+  46 |
+  47 |     const rows = Array.isArray(payload?.data)
+  48 |       ? payload.data {
+  code: 'ERR_INVALID_URL',
+  input: '/posts/case-study?portfolioCategoryIds=2'
+}
+ GET / 200 in 22634ms

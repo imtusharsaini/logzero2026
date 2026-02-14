@@ -25,7 +25,7 @@ export async function GET(request) {
   } catch (error) {
     console.error("Error fetching posts:", error);
     return Response.json(
-      { success: false, message: error.message },
+      { success: false, message: "Internal Server Error" },
       { status: 500 }
     );
   }
@@ -55,7 +55,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error creating post:", error);
     return Response.json(
-      { success: false, message: error.message },
+      { success: false, message: "Internal Server Error" },
       { status: 500 }
     );
   }

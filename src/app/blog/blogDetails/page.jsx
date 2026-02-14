@@ -5,7 +5,8 @@ import api from "@/lib/api";
 export const revalidate = 0;
 
 export async function generateMetadata({ searchParams }) {
-  const id = searchParams?.id || "1";
+  const { id: idRaw } = await searchParams;
+  const id = idRaw || "1";
   const apiUrl = `${
     process.env.NEXT_PUBLIC_API_BASE_URL ||
     "https://webapi.logzerotechnologies.com/api"

@@ -1,27 +1,29 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 // Host-aware site key selection with env overrides
-const DEFAULT_PROD_KEY = "6LdcgIcrAAAAAJV0b6w8_r1-5SivcsvljIvtlQr3"; // real v2 checkbox key
-const DEFAULT_LOCAL_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"; // Google test key
 const SCRIPT_ID = "recaptcha-key-script";
 
 function resolveSiteKey() {
   const envLocal = process.env.NEXT_PUBLIC_RECAPTCHA_LOCAL_SITE_KEY;
   const envProd = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+  // Google Test Key (always passes) - useful fallback for localhost if no env var set
+  const FALLBACK_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+
   if (typeof window === "undefined") {
-    return envProd || DEFAULT_PROD_KEY;
+    return envProd;
   }
 
   const host = window.location?.hostname || "";
   const isLocal = host === "localhost" || host === "127.0.0.1";
-  const resolvedKey = isLocal ? (envLocal || DEFAULT_LOCAL_TEST_KEY) : (envProd || DEFAULT_PROD_KEY);
-  const mode = isLocal ? "Local" : "Prod";
-  const keyPreview = resolvedKey.substring(0, 10) + "...";
 
-  // console.log(`Recaptcha Mode: ${mode} Key: ${keyPreview}`);
+  // For local: use env var, or fallback to test key
+  if (isLocal) {
+    return envLocal || FALLBACK_TEST_KEY;
+  }
 
-  return resolvedKey;
+  // For prod: must use env var
+  return envProd;
 }
 
 const Recaptcha = ({ onVerify, theme = "light" }) => {

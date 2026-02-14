@@ -47,7 +47,8 @@ const SearchOfCategory = [
 ];
 
 export async function generateMetadata({ params }) {
-	const slugParam = params?.slug || "";
+	const { slug: slugParamRaw } = await params;
+	const slugParam = slugParamRaw || "";
 	const slug = normalizeSlug(slugParam);
 	const meta = await fetchCategoryMeta(slug);
 	return meta;
@@ -68,8 +69,8 @@ async function fetchCategoryRows(slug, page = 1) {
 }
 
 export default async function CategoryPage(props) {
-	const { params } = props;
-	const searchParams = props.searchParams || {};
+	const params = await props.params;
+	const searchParams = await props.searchParams || {};
 	const slugParam = params?.slug || "";
 	const slug = normalizeSlug(slugParam);
 	const page = Number(searchParams?.page ?? 1);

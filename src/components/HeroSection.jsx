@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 import CounterNo from "./CounterNo";
@@ -139,6 +137,7 @@ export default function HeroSection({
             src={bannerimage}
             alt="Hero"
             fill
+            priority
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw"
             className="object-cover"
           />

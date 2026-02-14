@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import api from "@/lib/api";
-import { Lztallcontext } from "@/context/Lztcontext";
 import FAQSection from "@/components/FAQSection";
 import ScrollingLogosSection from "@/components/ScrollingLogosSection";
 import {
@@ -28,6 +27,9 @@ import ContactUsForm from "@/components/ContactUsForm";
 import batch1 from "../../public/assets/img/batch1.webp";
 import batch2 from "../../public/assets/img/batch2.webp";
 import batch3 from "../../public/assets/img/batch3.webp";
+
+// Import static data directly
+import { OurServicesList, testimonialsOne, SucessStoryData } from "@/lib/staticData";
 
 const BgColors = [
   "bgblue",
@@ -93,41 +95,6 @@ const rowTwo = [
   },
 ];
 
-const MobileappSucessStoryData = [
-  {
-    title: "ADPKD Urination-Tracking App for Tolvaptan Patients",
-    subtitle: "Healthcare, Pharmaceuticals",
-    challenge:
-      "The challenge was to create a solution that enables patients to easily and consistently track their urination patterns.",
-    solution:
-      "A Flutter app was developed for real-time urination tracking with set reporting times, followed by user feedback to refine the app for future trials.",
-    Resultstext:
-      "Higher data completeness and accuracy than self-reports, strong usability feedback, and clearer side-effect patterns to guide care.",
-    technologies: ["Flutter", "PHP (Laravel)", "React.js", "MySQL"],
-    image:
-      "/assets/img/ADPKD Urination-Tracking App for Tolvaptan Patients- Case Study.webp",
-    width: 564,
-    height: 383,
-    link: "https://www.logzerotechnologies.com/case-studies/improving-patient-experience-adpkd-treatment-urination-tracking-app/",
-  },
-  {
-    title:
-      "Enhancing Home Interior Projects with InteriorChowk’s Comprehensive Marketplace",
-    subtitle: "Home Interior Solutions & Services Marketplace",
-    challenge:
-      "Homeowners struggled with fragmented service providers, lack of trust, limited access to quality materials, and complex coordination during home interior projects.",
-    solution:
-      "InteriorChowk developed a single mobile app connecting homeowners with verified designers, skilled workers, and premium suppliers—offering a seamless platform for design, sourcing, and project management.",
-    Resultstext:
-      "Streamlined project workflows, improved customer satisfaction, higher trust through verified professionals, faster execution, and easy access to top-quality materials.",
-    technologies: ["PHP", "Laravel", "Flutter"],
-    image: "/assets/img/health-tracker.png",
-    width: 564,
-    height: 323,
-    link: "https://www.logzerotechnologies.com/case-studies/enhancing-home-interior-projects-with-interiorchowks-comprehensive-marketplace/",
-  },
-];
-
 const services = [
   "Web Development Services",
   "Mobile App Development",
@@ -176,12 +143,12 @@ const faqs = [
   },
 ];
 
-export default function HomePageClient() {
-  const { OurServicesList, testimonialsOne, SucessStoryData } =
-    useContext(Lztallcontext);
-
+export default function HomePageClient({ caseStudies }) {
   const topRef = useRef(null);
   const [status, setStatus] = useState("");
+
+  // Use passed case studies or fallback to static data
+  const displayedCaseStudies = caseStudies && caseStudies.length > 0 ? caseStudies : SucessStoryData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -524,7 +491,7 @@ export default function HomePageClient() {
           <SuccessStory
             title="Our Success Story"
             subtitle="Real projects, real results. See how we’ve helped businesses transform their ideas into successful mobile applications that drive growth and user engagement."
-            caseStudies={MobileappSucessStoryData}
+            caseStudies={displayedCaseStudies}
             portfolioCategorySlug="mobile-development"
           />
         </div>
